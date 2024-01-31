@@ -7,6 +7,7 @@ import {
 } from "@clerk/nextjs"
 
 import { cn } from "@/lib/utils"
+import { Hint } from "@/components/hint"
 
 interface ItemProps {
   id: string
@@ -32,13 +33,20 @@ export const Item = ({
 
   return (
     <div className="aspect-square relative">
-      <Image 
-        src={imageUrl}
-        alt={name}
-        fill
-        onClick={handleImageClick}
-        className={cn("rounded-lg cursor-pointer opacity-75 hover:opacity-100 transition duration-100", isActive && "opacity-100")}
-      />
+      <Hint
+        label={name}
+        side="right"
+        align="start"
+        sideOffset={18}
+      >
+        <Image 
+          src={imageUrl}
+          alt={name}
+          fill
+          onClick={handleImageClick}
+          className={cn("rounded-lg cursor-pointer opacity-75 hover:opacity-100 transition duration-100", isActive && "opacity-100")}
+        />
+      </Hint>
     </div>
   )
 }
