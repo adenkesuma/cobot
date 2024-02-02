@@ -1,8 +1,25 @@
+"use client"
+
 import Image from "next/image"
+import { useOrganization } from "@clerk/nextjs"
 
 import { Button } from "@/components/ui/button"
+import { api } from "@/convex/_generated/api"
+import { useApiMutation } from "@/hook/use-api-mutation"
 
 const EmptyBoards = () => {
+  const { organization } = useOrganization()
+  const { mutate, pending } = useApiMutation(api.board.create)
+
+  const handleBoard = () => {
+    if (!organization) return
+
+    mutate({
+      orgId: organization.id,
+      title: "Untitled"
+    })
+  }
+
   return (
     <div className="flex flex-col justify-center items-center h-full w-full">
       <Image 
@@ -20,7 +37,7 @@ const EmptyBoards = () => {
       </p>
 
       <div className="mt-6">
-        <Button>
+        <Button disabled={pending} onClick={handleBoard}>
           Create board
         </Button>
       </div>
