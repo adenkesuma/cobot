@@ -1,9 +1,16 @@
+import Image from "next/image"
+
 import { Button } from "@/components/ui/button"
 
 const EmptyBoards = () => {
   return (
     <div className="flex flex-col justify-center items-center h-full w-full">
-      <h1 className="text-gray-200 font-bold uppercase text-3xl">No Data</h1>
+      <Image 
+        src="note.svg"
+        alt="empty board"
+        width={200}
+        height={200}
+      />
 
       <h2 className="mt-6 font-semibold text-2xl">
         Create your first boards!
