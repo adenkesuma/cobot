@@ -16,6 +16,8 @@ import {
 
 import { useApiMutation } from "@/hook/use-api-mutation"
 import { api } from "@/convex/_generated/api"
+import ConfirmModal from "./confirm-modal"
+import { Button } from "./ui/button"
 
 interface ActionsProps {
   children: React.ReactNode
@@ -66,13 +68,21 @@ const Actions = ({
           <Link2 className="mr-2 h-4 w-4" />
           Copy board link
         </DropdownMenuItem>
-        <DropdownMenuItem 
-          className="p-3 cursor-pointer"
-          onClick={onDelete}
+
+        <ConfirmModal
+          header="Delete Board?"
+          description="This will delete the board and all the of it's contents"
+          disabled={pending}
+          onConfirm={onDelete}
         >
-          <Trash2 className="mr-2 h-4 w-4" />
-          Delete
-        </DropdownMenuItem>
+          <Button
+            variant="ghost"
+            className="p-3 cursor-pointer text-sm w-full justify-start font-normal"
+          >
+            <Trash2 className="mr-2 h-4 w-4" />
+            Delete
+          </Button>
+        </ConfirmModal>
       </DropdownMenuContent>
     </DropdownMenu>
   )
