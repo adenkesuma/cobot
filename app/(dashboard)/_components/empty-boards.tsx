@@ -6,6 +6,7 @@ import { useOrganization } from "@clerk/nextjs"
 import { Button } from "@/components/ui/button"
 import { api } from "@/convex/_generated/api"
 import { useApiMutation } from "@/hook/use-api-mutation"
+import { toast } from "sonner"
 
 const EmptyBoards = () => {
   const { organization } = useOrganization()
@@ -17,6 +18,12 @@ const EmptyBoards = () => {
     mutate({
       orgId: organization.id,
       title: "Untitled"
+    })
+    .then((id) => {
+      toast.success("Board created!")
+    })
+    .catch(() => {
+      toast.error("Failed to create board!")
     })
   }
 
