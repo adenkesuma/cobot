@@ -5,6 +5,7 @@ import { useAuth } from "@clerk/nextjs"
 import Image from "next/image"
 import Link from "next/link"
 
+import { Skeleton } from "@/components/ui/skeleton"
 import Overflay from "./overlay"
 import Footer from "./footer"
 
@@ -19,7 +20,7 @@ interface BoardCardProps {
   isFavorite: boolean
 }
 
-const BoardCard = ({
+export const BoardCard = ({
   id,
   title,
   authorName,
@@ -59,4 +60,10 @@ const BoardCard = ({
   )
 }
 
-export default BoardCard
+BoardCard.Skeleton = function BoardCardSkeleton() {
+  return (
+    <div className="rounded-lg overflow-hidden aspect-[100/127]">
+      <Skeleton className="w-full h-full" />
+    </div>
+  )
+}
